@@ -40,7 +40,7 @@ export const login = (req, res) => {
           .status(401)
           .json({ message: "Authentication failed! No User found." });
       } else if (user) {
-        if (!user.comparePassword(req.body.password, user.hashPassword)) {
+        if (user.comparePassword(req.body.password, user.hashPassword)) {
           res
             .status(401)
             .json({ message: "Authentication failed! Wrong password." });

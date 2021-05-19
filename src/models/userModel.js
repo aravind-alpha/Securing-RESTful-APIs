@@ -4,9 +4,9 @@ import bcrypt from "bcrypt";
 const Schema = mongoose.Schema;
 
 export const UserSchema = new Schema({
-  userName: {
+  username: {
     type: String,
-    required: "Enter a first name",
+    required: "Enter a user name",
   },
   email: {
     type: String,
@@ -21,3 +21,7 @@ export const UserSchema = new Schema({
     default: Date.now,
   },
 });
+
+UserSchema.methods.comparePassword = (password, hashPassword) => {
+  return bcrypt.compareSync(password, hashPassword);
+};
